@@ -26,6 +26,8 @@ from tradebot import live_data
 from tradebot.intraday.data import MINUTES
 from tradebot.intraday.live import OrbConfig
 from tradebot.intraday.sim import replay_day
+from tradebot.etf_rotation import RotParams, clean_prices
+from tradebot.etf_rotation import run_month as etf_month
 from tradebot.momentum import MomParams
 from tradebot.paper_momentum import run_day as momentum_day
 from tradebot.runner import run as swing_run
@@ -164,6 +166,21 @@ def _grid_from_5m(bars: pd.DataFrame):
     return g
 
 
+def etf(cfg_all) -> dict:
+    p = RotParams(**{k: v for k, v in cfg_all.get("etf_params", {}).items() if k in RotParams.__dataclass_fields__})
+    syms = p.assets + [p.cash] + (["NIFTYBEES"] if "NIFTYBEES" not in p.assets else [])
+    data = live_data.daily(syms, period="2y")
+    if any(s not in data for s in syms):
+        return {"status": "no_data", "error": f"missing {[s for s in syms if s not in data]}"}
+    px = clean_prices(pd.DataFrame({s: d.close for s, d in data.items()}).ffill().dropna())
+    day = px.index[-1]
+    if _done("etf", day):
+        return {"status": "already_done", "date": str(day.date())}
+    out = etf_month(ROOT / "etf" / "state.json", px, p, float(cfg_all.get("etf_monthly_sip", 3000)))
+    _mark("etf", day)
+    return out
+
+
 def benchmark(cfg_all) -> dict:
     idx = live_data.daily(["^NSEI"], period="1mo").get("^NSEI")
     if idx is None:
@@ -195,7 +212,9 @@ def report(cfg_all, results: dict):
             return r["equity"]
         return hist[name].dropna().iloc[-1] if name in hist and hist[name].notna().any() else cap[name]
     row = {"date": date, "swing": eq_of("swing"), "momentum": eq_of("momentum"), "intraday": eq_of("intraday"),
-           "nifty50": bm.get("last_close")}
+           "nifty50": bm.get("last_close"),
+           "etf_value": results.get("etf", {}).get("equity"), "etf_invested": results.get("etf", {}).get("invested"),
+           "etf_nifty_sip": results.get("etf", {}).get("nifty_sip_value")}
     if not hist.empty and str(hist.date.iloc[-1]) == date:
         hist = hist.iloc[:-1]
     hist = pd.concat([hist, pd.DataFrame([row])], ignore_index=True)
@@ -210,10 +229,27 @@ def report(cfg_all, results: dict):
     for name in ("swing", "momentum", "intraday"):
         e = row[name]
         lines.append(f"| {name} | ₹{cap[name]:,.0f} | ₹{e:,.0f} | {e / cap[name] - 1:+.2%} | {nret:+.2%} |")
+    e = results.get("etf", {})
+    if e.get("invested") or (not hist.empty and "etf_value" in hist):
+        inv = e.get("invested") or (hist["etf_invested"].dropna().iloc[-1] if "etf_invested" in hist else 0)
+        val = e.get("equity") or (hist["etf_value"].dropna().iloc[-1] if "etf_value" in hist else 0)
+        nb = e.get("nifty_sip_value") or (hist["etf_nifty_sip"].dropna().iloc[-1] if "etf_nifty_sip" in hist else 0)
+        if inv:
+            lines.append(f"| etf (Rs {cfg_all.get('etf_monthly_sip', 3000):,}/month SIP) | invested ₹{inv:,.0f} | ₹{val:,.0f} | "
+                         f"{val / inv - 1:+.2%} | same SIP in NIFTYBEES: ₹{nb:,.0f} ({nb / inv - 1:+.2%}) |")
     lines += ["", "## Today", ""]
-    for name in ("swing", "momentum", "intraday"):
+    for name in ("swing", "momentum", "intraday", "etf"):
         r = results.get(name, {})
         lines.append(f"**{name}**: {r.get('status')}")
+        if name == "etf":
+            if r.get("orders"):
+                lines.append("- 👉 **YOUR REAL-MONEY ACTION THIS MONTH** (if you mirror it in Kite, delivery/CNC):")
+                lines += [f"  - {o['side']} {o['units']} x {o['symbol']} (about ₹{o['units'] * o['price']:,.0f})" for o in r["orders"]]
+            if r.get("pick"):
+                lines.append(f"- pick: {', '.join(r['pick'])} | scores (blended 3/6/12-month return): "
+                             + ", ".join(f"{k} {v:+.1%}" for k, v in (r.get("scores") or {}).items()))
+            if r.get("holding"):
+                lines.append(f"- holding: " + ", ".join(f"{u} x {s}" for s, u in r["holding"].items()))
         if name == "swing" and r.get("orders"):
             lines += [f"- {o['side']} {o['symbol']} x{o['qty']} (AMO limit {o['limit']})" for o in r["orders"]]
         if name == "momentum":
@@ -241,13 +277,13 @@ def report(cfg_all, results: dict):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--config", default="config_paper.yaml")
-    ap.add_argument("--only", nargs="*", choices=["swing", "momentum", "intraday"])
+    ap.add_argument("--only", nargs="*", choices=["swing", "momentum", "intraday", "etf"])
     a = ap.parse_args()
     logging.basicConfig(level=logging.WARNING, format="%(levelname)s %(name)s %(message)s")
     cfg_all = yaml.safe_load(open(a.config))
     ROOT.mkdir(exist_ok=True)
     results = {}
-    for name, fn in (("swing", swing), ("momentum", momentum), ("intraday", intraday)):
+    for name, fn in (("swing", swing), ("momentum", momentum), ("intraday", intraday), ("etf", etf)):
         if a.only and name not in a.only:
             continue
         try:

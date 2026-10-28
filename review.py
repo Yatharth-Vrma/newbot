@@ -77,6 +77,13 @@ def main(root="paper"):
             out.append(f"  closed positions {len(sells)}, winners {wins} ({wins / len(sells):.0%}), "
                        f"realised Rs {sum(f['pnl'] for f in sells):,.0f}")
 
+    ef = root / "etf" / "state.json"
+    if ef.exists():
+        s2 = json.loads(ef.read_text())
+        if s2["equity"]:
+            e = s2["equity"][-1]
+            out.append(f"etf SIP: invested Rs {e['invested']:,.0f} -> Rs {e['value']:,.0f} ({e['value'] / e['invested'] - 1:+.2%}) "
+                       f"vs same SIP in NIFTYBEES Rs {e['nifty_sip_value']:,.0f} | pick {s2.get('last_pick')} | holding {s2['units']}")
     sj = root / "swing" / "journal_paper.csv"
     if sj.exists():
         t = pd.read_csv(sj)

@@ -14,3 +14,8 @@ intraday_slip_bps: 3.0   # assumed slippage on intraday fills
 intraday_switch:          # adaptive on/off for the intraday bot
   window_trades: 40        # judge it on its last 40 trades
   pause_if_net_below: 0    # pause (shadow-trade) when those trades lost money; resume when positive
+etf_monthly_sip: 3000      # small-account ETF rotation: new money added on the first trading day of each month
+etf_params:
+  assets: [NIFTYBEES, MID150BEES, MON100, GOLDBEES]
+  cash: LIQUIDBEES
+  top_k: 1
