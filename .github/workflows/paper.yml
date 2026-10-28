@@ -21,6 +21,8 @@ jobs:
       - run: pip install -r requirements.txt pytest
       - run: python -m pytest -q
       - run: python paper_daily.py
+        env:
+          PYTHONWARNINGS: ignore
       - name: Save results to the repo
         run: |
           git config user.name "paper-bot"
