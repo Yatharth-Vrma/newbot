@@ -1,2 +1,2 @@
-date,swing,momentum,intraday,nifty50
-2026-10-28,100000.0,500000,98834.58,22749.75
+date,swing,momentum,intraday,nifty50,etf_value,etf_invested,etf_nifty_sip
+2026-10-28,100000.0,500000,98834.58,22749.75,2993.61,3000.0,2993.76
