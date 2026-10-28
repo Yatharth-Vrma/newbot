@@ -1,0 +1,16 @@
+{
+ "cash": 500000,
+ "positions": {},
+ "last_rebalance_month": "2026-10",
+ "fills": [],
+ "equity": [
+  {
+   "date": "2026-10-27",
+   "equity": 500000,
+   "cash": 500000,
+   "n_positions": 0
+  }
+ ],
+ "last_regime": "RISK-OFF (index below 200-day average): holding cash",
+ "last_target": []
+}
