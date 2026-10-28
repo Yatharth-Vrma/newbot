@@ -1,0 +1,11 @@
+# Daily paper-trading run (paper_daily.py). Fake money only.
+capital:
+  swing: 100000
+  momentum: 500000       # 20 stocks x ~Rs 25k each
+  intraday: 100000
+momentum_params:
+  hold_n: 20
+  buffer_rank: 40
+  liquid_top: 300
+  regime_filter: true
+intraday_slip_bps: 3.0   # assumed slippage on intraday fills

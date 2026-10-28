@@ -1,0 +1,17 @@
+# Intraday ORB "Stocks in Play" bot (MIS). See README "Intraday" section and the backtest results first.
+capital: 100000          # rupees the bot sizes from (it never risks more than risk_pct of this per trade)
+top_n: 3                 # trade the 3 stocks with the highest opening relative volume
+stop_atr: 0.25           # stop-loss = 0.25 x 14-day ATR from the entry fill
+min_rv: 1.0              # only stocks trading more than their usual first-5-minute volume
+risk_pct: 0.005          # 0.5% of capital lost if a stop is hit
+day_loss_pct: 0.02       # square off everything and stop for the day at -2%
+max_leverage: 4.0        # total position value <= 4x capital (MIS margin)
+entry_limit_buffer: 0.001
+exit_limit_buffer: 0.01
+entry_cutoff: "15:00"
+square_off: "15:15"
+state_dir: state/intraday
+symbols: [RELIANCE, HDFCBANK, ICICIBANK, BHARTIARTL, INFY, LT, ITC, TCS, SBIN, AXISBANK, ADANIENT,
+          APOLLOHOSP, KOTAKBANK, M&M, HINDUNILVR, BAJFINANCE, SUNPHARMA, MARUTI, HCLTECH, NTPC,
+          ULTRACEMCO, TITAN, ASIANPAINT, BAJAJFINSV, CIPLA, COALINDIA, DRREDDY, GRASIM, HINDALCO,
+          JSWSTEEL, ONGC, POWERGRID, TATASTEEL]

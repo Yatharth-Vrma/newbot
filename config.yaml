@@ -1,0 +1,41 @@
+# ---------------------------------------------------------------- tradebot config
+mode: paper            # paper = fake money (default). live = real orders via Zerodha (also needs TRADEBOT_LIVE=YES)
+capital: 100000        # rupees the bot may use. In live mode it never uses more than this, even if your account has more.
+
+# NSE trading symbols (Kite tradingsymbol). Liquid large caps work best for daily strategies.
+symbols: [RELIANCE, HDFCBANK, ICICIBANK, INFY, TCS, BHARTIARTL, ITC, LT, SBIN, AXISBANK]
+
+# One of: sma_cross ema_cross macd rsi2 bollinger donchian supertrend momentum adx_dmi ichimoku ensemble
+# Run `python backtest.py` first and choose based on out-of-sample results.
+strategy: sma_cross
+strategy_params: {}    # e.g. for ensemble: {min_votes: 6}; for supertrend: {n: 10, mult: 3}
+
+data:
+  source: csv          # csv (from update_data.py, free) | yfinance (free) | kite (needs paid Kite Connect plan) | csv
+  csv_folder: data     # used when source: csv -> data/RELIANCE.csv etc.
+
+lookback_days: 800     # calendar days of history loaded each run (needs > ~400 trading days for 200-day/252-day rules)
+state_dir: state
+
+risk:
+  max_position_pct: 0.15     # max share of capital in any one stock
+  max_drawdown_pct: 0.15     # kill switch: from peak equity -> sell everything and halt
+  max_daily_loss_pct: 0.05   # kill switch: one-day equity drop
+  limit_buffer_pct: 0.01     # AMO limit = close +/- 1% (orders that gap past this don't fill)
+  max_orders_per_run: 20
+
+# Zerodha delivery charges (approx). Check https://zerodha.com/charges and edit if they change.
+costs:
+  brokerage_pct: 0.0
+  stt_pct: 0.001
+  exchange_pct: 0.0000297
+  sebi_pct: 0.000001
+  stamp_buy_pct: 0.00015
+  gst_pct: 0.18
+  dp_charge_per_sell: 15.93
+  slippage_pct: 0.0005
+
+backtest:
+  start: "2012-01-01"
+  oos_fraction: 0.3          # last 30% of the period is out-of-sample
+  risk_free_rate: 0.065      # Sharpe is measured against ~FD/T-bill returns, not zero
