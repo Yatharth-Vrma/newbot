@@ -8,4 +8,9 @@ momentum_params:
   buffer_rank: 40
   liquid_top: 300
   regime_filter: true
+  exposure_mode: adaptive    # invest 0/50/100% by trend + breadth, scaled down when volatility > vol_target
+  vol_target: 0.18
 intraday_slip_bps: 3.0   # assumed slippage on intraday fills
+intraday_switch:          # adaptive on/off for the intraday bot
+  window_trades: 40        # judge it on its last 40 trades
+  pause_if_net_below: 0    # pause (shadow-trade) when those trades lost money; resume when positive

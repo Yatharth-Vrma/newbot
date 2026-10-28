@@ -111,18 +111,37 @@ def intraday(cfg_all) -> dict:
     eq_file = ROOT / "intraday" / "equity.json"
     eq = json.loads(eq_file.read_text()) if eq_file.exists() else []
     capital = eq[-1]["equity"] if eq else cfg_all["capital"]["intraday"]
+    mode, why = _intraday_switch(cfg_all)
     fields = {k: v for k, v in icfg.items() if k in OrbConfig.__dataclass_fields__}
     fields |= {"symbols": sorted(uni), "capital": capital, "state_dir": str(ROOT / "intraday")}
     bot = replay_day(uni, day, OrbConfig(**fields), slip_bps=cfg_all.get("intraday_slip_bps", 3.0))
     pnl = getattr(bot, "day_pnl", 0.0)
-    eq.append({"date": str(day.date()), "equity": round(capital + pnl, 2), "pnl": round(pnl, 2),
+    applied = pnl if mode == "ACTIVE" else 0.0   # SHADOW: trades are still simulated and logged, money untouched
+    eq.append({"date": str(day.date()), "equity": round(capital + applied, 2), "pnl": round(applied, 2),
+               "shadow_pnl": round(pnl, 2), "mode": mode, "why": why,
                "trades": sum(l.status == "DONE" for l in bot.legs.values()), "halt": bot.halt_reason})
     eq_file.parent.mkdir(parents=True, exist_ok=True)
     eq_file.write_text(json.dumps(eq, indent=1))
     _mark("intraday", day)
-    return {"status": "ok", "date": str(day.date()), "pnl": round(pnl, 2), "equity": round(capital + pnl, 2),
+    return {"status": "ok", "date": str(day.date()), "pnl": round(applied, 2), "equity": round(capital + applied, 2),
+            "mode": mode, "why": why, "shadow_pnl": round(pnl, 2),
             "trades": [{"symbol": l.symbol, "side": l.side, "qty": l.qty, "entry": l.entry_price, "exit": l.exit_price,
                         "reason": l.exit_reason} for l in bot.legs.values() if l.status == "DONE"]}
+
+
+def _intraday_switch(cfg_all) -> tuple[str, str]:
+    """Adaptive on/off: trade with (paper) money only while the strategy's own recent record is positive.
+    Uses the last N trades (traded or shadow) from the journal, i.e. only information known before today."""
+    sw = cfg_all.get("intraday_switch", {})
+    n, floor = int(sw.get("window_trades", 40)), float(sw.get("pause_if_net_below", 0.0))
+    j = ROOT / "intraday" / "journal.csv"
+    t = pd.read_csv(j) if j.exists() else pd.DataFrame()
+    if len(t) < n:
+        return "ACTIVE", f"learning period ({len(t)}/{n} trades)"
+    net = float(t.net.tail(n).sum())
+    if net < floor:
+        return "SHADOW", f"last {n} trades net Rs {net:,.0f} < {floor:,.0f}: paused, still tracking"
+    return "ACTIVE", f"last {n} trades net Rs {net:,.0f}"
 
 
 def _grid_from_5m(bars: pd.DataFrame):
@@ -204,6 +223,8 @@ def report(cfg_all, results: dict):
             if r.get("positions"):
                 lines.append(f"- holding {len(r['positions'])}: {', '.join(sorted(r['positions']))}")
         if name == "intraday":
+            if r.get("mode"):
+                lines.append(f"- mode: {r['mode']} ({r['why']})" + (f", shadow P&L Rs {r['shadow_pnl']:,.0f}" if r["mode"] == "SHADOW" else ""))
             for t in r.get("trades", []):
                 lines.append(f"- {t['side']} {t['symbol']} x{t['qty']} {t['entry']} -> {t['exit']} ({t['reason']})")
             if r.get("pnl") is not None:
