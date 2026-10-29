@@ -43,18 +43,24 @@ def main():
     except Exception as e:
         ok = False
         print(f"2. Live prices: FAILED -> {e} | raw: {str(a.last_raw)[:1500]}")
-    for label, interval, days in (("3. Daily candles", "1d", 20), ("4. 5-minute candles", "5m", 3)):
-        try:
-            d = a.candles("RELIANCE", interval, days=days)
-            if len(d):
-                print(f"{label}: OK ({len(d)} candles, last {d.index[-1]} close {d.close.iloc[-1]:,.2f})")
-            else:
-                ok = False
-                print(f"{label}: EMPTY. Raw reply from Angel:")
-                print("  ", str(a.last_raw)[:1500])
-        except Exception as e:
+    try:
+        o = a.today_ohlc(syms)
+        if o:
+            print("3. Today's live candle: OK")
+            for s, c in o.items():
+                print(f"   {s:10s} open {c['open']:,.2f}  high {c['high']:,.2f}  low {c['low']:,.2f}  now {c['last']:,.2f}  (prev close {c['prev_close']:,.2f})")
+        else:
             ok = False
-            print(f"{label}: FAILED -> {e} | raw: {str(a.last_raw)[:1500]}")
+            print("3. Today's live candle: EMPTY. Raw:", str(a.last_raw)[:800])
+    except Exception as e:
+        ok = False
+        print(f"3. Today's live candle: FAILED -> {e}")
+    try:  # optional: Angel's candle-history service (Yahoo covers history if this is unavailable)
+        d = a.candles("RELIANCE", "1d", days=20)
+        print(f"4. (optional) Candle history: OK ({len(d)} daily candles)" if len(d) else
+              f"4. (optional) Candle history: empty. Raw: {str(a.last_raw)[:500]}")
+    except Exception as e:
+        print(f"4. (optional) Candle history: not available -> {str(e)[:500]}")
     print("\nAll good: the bot can see live prices." if ok else "\nSome checks failed (see above).")
     sys.exit(0 if ok else 1)
 
