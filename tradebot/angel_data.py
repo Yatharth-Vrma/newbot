@@ -39,6 +39,7 @@ class AngelData:
         self.jwt = None
         self._tokens: dict[str, str] = {}
         self._last_call = 0.0
+        self.last_raw = None          # last raw API reply (for diagnostics; contains no secrets)
 
     # ---------------------------------------------------------------- plumbing
     def _headers(self, auth=True):
@@ -59,6 +60,9 @@ class AngelData:
                 r = self.http.post(host + path, headers=self._headers(auth), data=json.dumps(body), timeout=20)
                 self._last_call = time.time()
                 data = r.json()
+                self.last_raw = {k: v for k, v in data.items() if k != "data"} | {
+                    "data": data["data"] if not (isinstance(data.get("data"), dict) and "jwtToken" in data["data"]) else "<login tokens hidden>",
+                    "http_status": getattr(r, "status_code", None)}
                 self.host = host
                 if not data.get("status", False) and data.get("data") is None:
                     raise AngelError(f"{path}: {data.get('message')} ({data.get('errorcode')})")
@@ -111,7 +115,11 @@ class AngelData:
             data = self._post("/rest/secure/angelbroking/market/v1/quote/",
                               {"mode": "LTP", "exchangeTokens": {"NSE": items[i:i + 50]}})
             for q in (data or {}).get("fetched", []):
-                out[tok[str(q["symbolToken"])]] = float(q["ltp"])
+                key = str(q.get("symbolToken"))
+                if key in tok:
+                    out[tok[key]] = float(q["ltp"])
+                elif q.get("tradingSymbol"):
+                    out[q["tradingSymbol"].replace("-EQ", "")] = float(q["ltp"])
         return out
 
     def candles(self, symbol: str, interval="1d", days=30) -> pd.DataFrame:
