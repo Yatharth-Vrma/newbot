@@ -25,22 +25,36 @@ def main():
         print("   Check the 4 secrets: ANGEL_API_KEY, ANGEL_CLIENT_ID, ANGEL_PIN (4-digit login PIN), ANGEL_TOTP_SECRET")
         sys.exit(1)
     ok = True
+    syms = ["RELIANCE", "HDFCBANK", "NIFTYBEES", "MON100", "GOLDBEES"]
     try:
-        px = a.ltp(["RELIANCE", "HDFCBANK", "NIFTYBEES", "MON100", "GOLDBEES"])
-        print("2. Live prices: OK")
-        for s, p in px.items():
-            print(f"   {s:10s} Rs {p:,.2f}")
-    except AngelError as e:
-        ok = False
-        print(f"2. Live prices: FAILED -> {e}")
+        print("   tokens:", {s: a.token(s) for s in syms})
+    except Exception as e:
+        print(f"   token lookup FAILED -> {e}")
     try:
-        d = a.candles("RELIANCE", "1d", days=20)
-        print(f"3. Daily candles: OK ({len(d)} days, last {d.index[-1].date()} close {d.close.iloc[-1]:,.2f})")
-        m = a.candles("RELIANCE", "5m", days=3)
-        print(f"4. 5-minute candles: OK ({len(m)} candles, last {m.index[-1]})")
+        px = a.ltp(syms)
+        if px:
+            print("2. Live prices: OK")
+            for s, p in px.items():
+                print(f"   {s:10s} Rs {p:,.2f}")
+        else:
+            ok = False
+            print("2. Live prices: EMPTY. Raw reply from Angel:")
+            print("  ", str(a.last_raw)[:1500])
     except Exception as e:
         ok = False
-        print(f"3/4. Candles: FAILED -> {e}")
+        print(f"2. Live prices: FAILED -> {e} | raw: {str(a.last_raw)[:1500]}")
+    for label, interval, days in (("3. Daily candles", "1d", 20), ("4. 5-minute candles", "5m", 3)):
+        try:
+            d = a.candles("RELIANCE", interval, days=days)
+            if len(d):
+                print(f"{label}: OK ({len(d)} candles, last {d.index[-1]} close {d.close.iloc[-1]:,.2f})")
+            else:
+                ok = False
+                print(f"{label}: EMPTY. Raw reply from Angel:")
+                print("  ", str(a.last_raw)[:1500])
+        except Exception as e:
+            ok = False
+            print(f"{label}: FAILED -> {e} | raw: {str(a.last_raw)[:1500]}")
     print("\nAll good: the bot can see live prices." if ok else "\nSome checks failed (see above).")
     sys.exit(0 if ok else 1)
 
