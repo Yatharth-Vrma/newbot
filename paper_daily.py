@@ -216,6 +216,8 @@ def report(cfg_all, results: dict):
            "etf_value": results.get("etf", {}).get("equity"), "etf_invested": results.get("etf", {}).get("invested"),
            "etf_nifty_sip": results.get("etf", {}).get("nifty_sip_value")}
     if not hist.empty and str(hist.date.iloc[-1]) == date:
+        # same-day re-run: bots that already finished today report no numbers, so keep the old ones
+        row = {k: hist.iloc[-1].get(k) if v is None else v for k, v in row.items()}
         hist = hist.iloc[:-1]
     hist = pd.concat([hist, pd.DataFrame([row])], ignore_index=True)
     hist.to_csv(hist_f, index=False)
