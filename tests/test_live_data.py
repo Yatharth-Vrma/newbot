@@ -22,6 +22,13 @@ def test_split_daily():
     assert list(out["RELIANCE"].columns) == ["open", "high", "low", "close", "volume"]
 
 
+def test_complete_days_drops_unfinished_today():
+    idx = pd.date_range("2026-10-27", periods=3, freq="D")  # 27, 28, 29 Oct
+    d = pd.DataFrame({"close": [1.0, 2.0, 3.0]}, index=idx)
+    assert live_data.complete_days(d, pd.Timestamp("2026-10-29 11:00")).index[-1] == pd.Timestamp("2026-10-28")
+    assert live_data.complete_days(d, pd.Timestamp("2026-10-29 17:15")).index[-1] == pd.Timestamp("2026-10-29")
+
+
 def test_minute_grid_tz():
     idx = pd.date_range("2026-10-28 09:15", periods=375, freq="min", tz="Asia/Kolkata")
     out = live_data._split(yf_like(["INFY.NS"], idx), ["INFY"])

@@ -246,5 +246,9 @@ config_paper.yaml        paper capital per bot
 tradebot/momentum.py     monthly Nifty 500 momentum rotation (+ paper_momentum.py)
 tradebot/intraday/       ORB engine, live bot, Kite/paper/replay adapters
 backtest_momentum.py / backtest_intraday.py / replay_intraday.py   research
+tradebot/etf_rotation.py monthly ETF dual-momentum SIP
+tradebot/live_data.py    free Yahoo data used by all paper bots
+tradebot/angel_data.py   read-only Angel One SmartAPI data client (no order functions)
+angel_check.py           Angel login/data check (.github/workflows/angel-check.yml, manual)
 tests/                   look-ahead, cost, paper end-to-end, kill-switch, intraday and data-parsing tests
 ```

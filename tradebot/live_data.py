@@ -49,8 +49,21 @@ def _split(df: pd.DataFrame, symbols, tz_naive=True) -> dict[str, pd.DataFrame]:
             continue
         if tz_naive and d.index.tz is not None:
             d.index = d.index.tz_convert("Asia/Kolkata").tz_localize(None)
+        if tz_naive:
+            d = complete_days(d)
+        if d.empty:
+            continue
         out[s] = d
     return out
+
+
+def complete_days(d: pd.DataFrame, now: pd.Timestamp | None = None) -> pd.DataFrame:
+    """Drop today's candles before 16:00 IST: during market hours Yahoo serves a half-built bar,
+    and a manual run would otherwise trade on it and mark the day as done."""
+    now = now or pd.Timestamp.now(tz="Asia/Kolkata").tz_localize(None)
+    if now.hour >= 16:
+        return d
+    return d[d.index.normalize() < now.normalize()]
 
 
 def daily(symbols, period="2y", chunk=100) -> dict[str, pd.DataFrame]:
