@@ -4,23 +4,20 @@ Fake money, real NSE prices. Nifty 50 column = what the same capital would be wo
 
 | Bot | Start capital | Equity now | Return | Nifty 50 same period |
 |---|---|---|---|---|
-| swing | ₹100,000 | ₹100,000 | +0.00% | +0.00% |
-| momentum | ₹500,000 | ₹500,000 | +0.00% | +0.00% |
-| intraday | ₹100,000 | ₹98,835 | -1.17% | +0.00% |
+| swing | ₹100,000 | ₹99,970 | -0.03% | -0.22% |
+| momentum | ₹500,000 | ₹500,073 | +0.01% | -0.22% |
+| intraday | ₹100,000 | ₹98,835 | -1.17% | -0.22% |
 | etf (Rs 3,000/month SIP) | invested ₹3,000 | ₹2,994 | -0.21% | same SIP in NIFTYBEES: ₹2,994 (-0.21%) |
 
 ## Today
 
-**swing**: already_done
+**swing**: ok
 
-**momentum**: already_done
+**momentum**: ok
+- regime: RISK-OFF (index below 200-day average): holding cash
 
 **intraday**: already_done
 
-**etf**: ok
-- 👉 **YOUR REAL-MONEY ACTION THIS MONTH** (if you mirror it in Kite, delivery/CNC):
-  - BUY 10 x MON100 (about ₹2,924)
-- pick: MON100 | scores (blended 3/6/12-month return): MON100 +27.4%, GOLDBEES +11.5%, MID150BEES +2.6%, NIFTYBEES -5.0%
-- holding: 10 x MON100
+**etf**: already_done
 
 Files: `paper/history.csv`, `paper/swing/journal_paper.csv`, `paper/momentum/state.json`, `paper/intraday/journal.csv`.

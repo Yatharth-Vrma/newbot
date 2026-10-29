@@ -1,17 +1,23 @@
 {
-  "cash": 100000.0,
-  "positions": {},
-  "pending": [
+  "cash": 90327.21123123531,
+  "positions": {
+    "ICICIBANK": 7
+  },
+  "pending": [],
+  "fills": [
     {
       "id": "P1793214044577ICICIBANK",
       "symbol": "ICICIBANK",
       "side": "BUY",
       "qty": 7,
       "limit": 1400.8,
-      "date": "2026-10-27"
+      "date": "2026-10-27",
+      "fill_date": "2026-10-28",
+      "fill_price": 1380.18975,
+      "charges": 11.46,
+      "status": "FILLED"
     }
   ],
-  "fills": [],
   "peak_equity": 100000.0,
-  "last_equity": 100000.0
+  "last_equity": 99970.41106033688
 }
