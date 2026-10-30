@@ -26,6 +26,12 @@
    "value": 2959.01,
    "invested": 3000.0,
    "nifty_sip_value": 3020.05
+  },
+  {
+   "date": "2026-10-30",
+   "value": 2921.41,
+   "invested": 3000.0,
+   "nifty_sip_value": 3031.16
   }
  ],
  "bench_units": 11.0,
