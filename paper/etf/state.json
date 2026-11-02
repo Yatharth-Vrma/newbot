@@ -1,10 +1,10 @@
 {
- "cash": 72.00921973931918,
+ "cash": 888.7932715372017,
  "units": {
-  "MON100": 10
+  "LIQUIDBEES": 5
  },
- "invested": 3000.0,
- "last_month": "2026-10",
+ "invested": 6000.0,
+ "last_month": "2026-11",
  "orders": [
   {
    "date": "2026-10-28",
@@ -12,6 +12,20 @@
    "symbol": "MON100",
    "units": 10,
    "price": 292.45
+  },
+  {
+   "date": "2026-11-02",
+   "side": "SELL",
+   "symbol": "MON100",
+   "units": 10,
+   "price": 284.66
+  },
+  {
+   "date": "2026-11-02",
+   "side": "BUY",
+   "symbol": "LIQUIDBEES",
+   "units": 5,
+   "price": 1000.99
   }
  ],
  "equity": [
@@ -32,17 +46,23 @@
    "value": 2921.41,
    "invested": 3000.0,
    "nifty_sip_value": 3031.16
+  },
+  {
+   "date": "2026-11-02",
+   "value": 5888.74,
+   "invested": 6000.0,
+   "nifty_sip_value": 6024.83
   }
  ],
- "bench_units": 11.0,
- "bench_cash": 139.3663800730792,
+ "bench_units": 22.0,
+ "bench_cash": 241.2506817867784,
  "last_pick": [
-  "MON100"
+  "LIQUIDBEES"
  ],
  "last_scores": {
-  "MON100": 0.2737,
-  "GOLDBEES": 0.1153,
-  "MID150BEES": 0.0263,
-  "NIFTYBEES": -0.05
+  "GOLDBEES": 0.0209,
+  "MON100": 0.0147,
+  "MID150BEES": -0.0553,
+  "NIFTYBEES": -0.0625
  }
 }
