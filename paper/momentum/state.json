@@ -1,7 +1,7 @@
 {
- "cash": 500220.0789695642,
+ "cash": 500440.25480863405,
  "positions": {},
- "last_rebalance_month": "2026-10",
+ "last_rebalance_month": "2026-11",
  "fills": [],
  "equity": [
   {
@@ -27,9 +27,22 @@
    "equity": 500220.08,
    "cash": 500220.08,
    "n_positions": 0
+  },
+  {
+   "date": "2026-11-02",
+   "equity": 500440.25,
+   "cash": 500440.25,
+   "n_positions": 0
   }
  ],
- "regime_log": [],
- "last_regime": "RISK-OFF (index below 200-day average): holding cash",
- "last_target": []
+ "regime_log": [
+  {
+   "month": "2026-11",
+   "exposure": 0.0,
+   "why": "bear: index < 200-DMA, breadth 31%"
+  }
+ ],
+ "last_regime": "invest 0%: bear: index < 200-DMA, breadth 31%",
+ "last_target": [],
+ "last_exposure": 0.0
 }
