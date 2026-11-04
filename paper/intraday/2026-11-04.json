@@ -1,0 +1,158 @@
+{
+ "phase": "DONE",
+ "halt": null,
+ "feats": {
+  "ADANIENT": {
+   "atr": 68.29288155691964,
+   "avg_vol5": 0.0
+  },
+  "APOLLOHOSP": {
+   "atr": 198.57142857142858,
+   "avg_vol5": 0.0
+  },
+  "ASIANPAINT": {
+   "atr": 57.278529575892854,
+   "avg_vol5": 0.0
+  },
+  "AXISBANK": {
+   "atr": 26.00714111328125,
+   "avg_vol5": 0.0
+  },
+  "BAJAJFINSV": {
+   "atr": 36.20717075892857,
+   "avg_vol5": 0.0
+  },
+  "BAJFINANCE": {
+   "atr": 26.41428484235491,
+   "avg_vol5": 0.0
+  },
+  "BHARTIARTL": {
+   "atr": 50.75714111328125,
+   "avg_vol5": 0.0
+  },
+  "CIPLA": {
+   "atr": 27.52142333984375,
+   "avg_vol5": 0.0
+  },
+  "COALINDIA": {
+   "atr": 9.749993460518974,
+   "avg_vol5": 0.0
+  },
+  "DRREDDY": {
+   "atr": 30.542872837611608,
+   "avg_vol5": 0.0
+  },
+  "GRASIM": {
+   "atr": 65.30714634486607,
+   "avg_vol5": 0.0
+  },
+  "HCLTECH": {
+   "atr": 38.11427525111607,
+   "avg_vol5": 0.0
+  },
+  "HDFCBANK": {
+   "atr": 14.746429443359375,
+   "avg_vol5": 0.0
+  },
+  "HINDALCO": {
+   "atr": 21.896427699497767,
+   "avg_vol5": 0.0
+  },
+  "HINDUNILVR": {
+   "atr": 47.342869349888396,
+   "avg_vol5": 0.0
+  },
+  "ICICIBANK": {
+   "atr": 27.764290945870535,
+   "avg_vol5": 0.0
+  },
+  "INFY": {
+   "atr": 40.27142333984375,
+   "avg_vol5": 0.0
+  },
+  "ITC": {
+   "atr": 5.42499760219029,
+   "avg_vol5": 0.0
+  },
+  "JSWSTEEL": {
+   "atr": 35.55712890625,
+   "avg_vol5": 595.2857142857143
+  },
+  "KOTAKBANK": {
+   "atr": 9.896429879324776,
+   "avg_vol5": 0.0
+  },
+  "LT": {
+   "atr": 81.76426478794643,
+   "avg_vol5": 0.0
+  },
+  "M&M": {
+   "atr": 63.535679408482146,
+   "avg_vol5": 0.0
+  },
+  "MARUTI": {
+   "atr": 258.42857142857144,
+   "avg_vol5": 0.0
+  },
+  "NTPC": {
+   "atr": 7.814283098493304,
+   "avg_vol5": 0.0
+  },
+  "ONGC": {
+   "atr": 4.152858189174107,
+   "avg_vol5": 0.0
+  },
+  "POWERGRID": {
+   "atr": 6.278569902692523,
+   "avg_vol5": 0.0
+  },
+  "RELIANCE": {
+   "atr": 36.957144601004465,
+   "avg_vol5": 740337.2142857143
+  },
+  "SBIN": {
+   "atr": 19.964290073939733,
+   "avg_vol5": 0.0
+  },
+  "SUNPHARMA": {
+   "atr": 38.07856968470982,
+   "avg_vol5": 0.0
+  },
+  "TATASTEEL": {
+   "atr": 4.259996686662946,
+   "avg_vol5": 0.0
+  },
+  "TCS": {
+   "atr": 70.59999302455357,
+   "avg_vol5": 0.0
+  },
+  "TITAN": {
+   "atr": 86.95713588169643,
+   "avg_vol5": 0.0
+  },
+  "ULTRACEMCO": {
+   "atr": 263.42857142857144,
+   "avg_vol5": 0.0
+  }
+ },
+ "legs": {
+  "JSWSTEEL": {
+   "symbol": "JSWSTEEL",
+   "side": "BUY",
+   "qty": 57,
+   "trigger": 1324.25,
+   "atr": 35.55712890625,
+   "rv": 37.89,
+   "status": "DONE",
+   "entry_id": "SIM1",
+   "entry_price": 1324.65,
+   "entry_time": "09:24",
+   "stop_id": "SIM2",
+   "stop_price": 1315.75,
+   "exit_id": "SIM3",
+   "exit_price": 1334.6,
+   "exit_time": "15:15",
+   "exit_reason": "square_off"
+  }
+ }
+}
