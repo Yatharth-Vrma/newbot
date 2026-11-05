@@ -55,5 +55,15 @@
   "why": "learning period (5/40 trades)",
   "trades": 1,
   "halt": null
+ },
+ {
+  "date": "2026-11-05",
+  "equity": 102414.44,
+  "pnl": 180.7,
+  "shadow_pnl": 180.7,
+  "mode": "ACTIVE",
+  "why": "learning period (6/40 trades)",
+  "trades": 1,
+  "halt": null
  }
 ]

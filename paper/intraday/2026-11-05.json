@@ -1,0 +1,158 @@
+{
+ "phase": "DONE",
+ "halt": null,
+ "feats": {
+  "ADANIENT": {
+   "atr": 74.00003487723214,
+   "avg_vol5": 0.0
+  },
+  "APOLLOHOSP": {
+   "atr": 196.60714285714286,
+   "avg_vol5": 0.0
+  },
+  "ASIANPAINT": {
+   "atr": 56.649954659598215,
+   "avg_vol5": 0.0
+  },
+  "AXISBANK": {
+   "atr": 25.74285888671875,
+   "avg_vol5": 0.0
+  },
+  "BAJAJFINSV": {
+   "atr": 38.8857421875,
+   "avg_vol5": 0.0
+  },
+  "BAJFINANCE": {
+   "atr": 26.828569684709823,
+   "avg_vol5": 0.0
+  },
+  "BHARTIARTL": {
+   "atr": 50.40000697544643,
+   "avg_vol5": 0.0
+  },
+  "CIPLA": {
+   "atr": 26.75,
+   "avg_vol5": 0.0
+  },
+  "COALINDIA": {
+   "atr": 9.874993460518974,
+   "avg_vol5": 0.0
+  },
+  "DRREDDY": {
+   "atr": 29.492867606026785,
+   "avg_vol5": 0.0
+  },
+  "GRASIM": {
+   "atr": 66.028564453125,
+   "avg_vol5": 0.0
+  },
+  "HCLTECH": {
+   "atr": 38.5428466796875,
+   "avg_vol5": 0.0
+  },
+  "HDFCBANK": {
+   "atr": 15.414289202008929,
+   "avg_vol5": 0.0
+  },
+  "HINDALCO": {
+   "atr": 22.696428571428573,
+   "avg_vol5": 0.0
+  },
+  "HINDUNILVR": {
+   "atr": 47.635733468191965,
+   "avg_vol5": 0.0
+  },
+  "ICICIBANK": {
+   "atr": 28.035723005022323,
+   "avg_vol5": 0.0
+  },
+  "INFY": {
+   "atr": 40.33213588169643,
+   "avg_vol5": 0.0
+  },
+  "ITC": {
+   "atr": 6.024997166224888,
+   "avg_vol5": 0.0
+  },
+  "JSWSTEEL": {
+   "atr": 36.242850167410715,
+   "avg_vol5": 0.0
+  },
+  "KOTAKBANK": {
+   "atr": 9.942858014787946,
+   "avg_vol5": 0.0
+  },
+  "LT": {
+   "atr": 81.40713936941964,
+   "avg_vol5": 0.0
+  },
+  "M&M": {
+   "atr": 61.957101004464285,
+   "avg_vol5": 0.0
+  },
+  "MARUTI": {
+   "atr": 260.0,
+   "avg_vol5": 0.0
+  },
+  "NTPC": {
+   "atr": 7.742856706891741,
+   "avg_vol5": 0.0
+  },
+  "ONGC": {
+   "atr": 4.297858101981027,
+   "avg_vol5": 0.0
+  },
+  "POWERGRID": {
+   "atr": 6.524998256138393,
+   "avg_vol5": 0.0
+  },
+  "RELIANCE": {
+   "atr": 36.700003487723215,
+   "avg_vol5": 740337.2142857143
+  },
+  "SBIN": {
+   "atr": 20.521432059151785,
+   "avg_vol5": 0.0
+  },
+  "SUNPHARMA": {
+   "atr": 37.67857142857143,
+   "avg_vol5": 0.0
+  },
+  "TATASTEEL": {
+   "atr": 4.493567330496652,
+   "avg_vol5": 0.0
+  },
+  "TCS": {
+   "atr": 71.54999651227679,
+   "avg_vol5": 0.0
+  },
+  "TITAN": {
+   "atr": 98.88570731026786,
+   "avg_vol5": 0.0
+  },
+  "ULTRACEMCO": {
+   "atr": 264.85714285714283,
+   "avg_vol5": 0.0
+  }
+ },
+ "legs": {
+  "RELIANCE": {
+   "symbol": "RELIANCE",
+   "side": "SELL",
+   "qty": 55,
+   "trigger": 1318.35,
+   "atr": 36.700003487723215,
+   "rv": 1.48,
+   "status": "DONE",
+   "entry_id": "SIM1",
+   "entry_price": 1317.9,
+   "entry_time": "09:20",
+   "stop_id": "SIM2",
+   "stop_price": 1327.1,
+   "exit_id": "SIM3",
+   "exit_price": 1313.29,
+   "exit_time": "15:15",
+   "exit_reason": "square_off"
+  }
+ }
+}
