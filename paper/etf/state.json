@@ -70,6 +70,12 @@
    "value": 5888.79,
    "invested": 6000.0,
    "nifty_sip_value": 6494.09
+  },
+  {
+   "date": "2026-11-09",
+   "value": 5888.79,
+   "invested": 6000.0,
+   "nifty_sip_value": 6511.47
   }
  ],
  "bench_units": 22.0,

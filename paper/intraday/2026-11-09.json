@@ -1,0 +1,194 @@
+{
+ "phase": "DONE",
+ "halt": null,
+ "feats": {
+  "ADANIENT": {
+   "atr": 77.67147391183036,
+   "avg_vol5": 0.0
+  },
+  "APOLLOHOSP": {
+   "atr": 213.53571428571428,
+   "avg_vol5": 7450.642857142857
+  },
+  "ASIANPAINT": {
+   "atr": 68.09994070870536,
+   "avg_vol5": 24327.35714285714
+  },
+  "AXISBANK": {
+   "atr": 29.50714111328125,
+   "avg_vol5": 64342.857142857145
+  },
+  "BAJAJFINSV": {
+   "atr": 44.657174246651785,
+   "avg_vol5": 6764.928571428572
+  },
+  "BAJFINANCE": {
+   "atr": 32.510716029575896,
+   "avg_vol5": 177016.64285714287
+  },
+  "BHARTIARTL": {
+   "atr": 47.028573172433035,
+   "avg_vol5": 62212.21428571428
+  },
+  "CIPLA": {
+   "atr": 26.600001743861608,
+   "avg_vol5": 0.0
+  },
+  "COALINDIA": {
+   "atr": 10.339276994977679,
+   "avg_vol5": 0.0
+  },
+  "DRREDDY": {
+   "atr": 28.692879813058035,
+   "avg_vol5": 5264.857142857143
+  },
+  "GRASIM": {
+   "atr": 67.92142159598214,
+   "avg_vol5": 3385.214285714286
+  },
+  "HCLTECH": {
+   "atr": 39.31427001953125,
+   "avg_vol5": 12507.57142857143
+  },
+  "HDFCBANK": {
+   "atr": 17.721431187220983,
+   "avg_vol5": 0.0
+  },
+  "HINDALCO": {
+   "atr": 24.249995640345983,
+   "avg_vol5": 23089.14285714286
+  },
+  "HINDUNILVR": {
+   "atr": 48.650015694754465,
+   "avg_vol5": 8698.714285714286
+  },
+  "ICICIBANK": {
+   "atr": 33.642857142857146,
+   "avg_vol5": 205828.42857142858
+  },
+  "INFY": {
+   "atr": 39.21071079799107,
+   "avg_vol5": 61568.21428571428
+  },
+  "ITC": {
+   "atr": 6.457139151436942,
+   "avg_vol5": 0.0
+  },
+  "JSWSTEEL": {
+   "atr": 35.514290945870535,
+   "avg_vol5": 8326.0
+  },
+  "KOTAKBANK": {
+   "atr": 10.707144601004464,
+   "avg_vol5": 106311.0
+  },
+  "LT": {
+   "atr": 89.29999651227679,
+   "avg_vol5": 25488.35714285714
+  },
+  "M&M": {
+   "atr": 74.32139369419643,
+   "avg_vol5": 40027.92857142857
+  },
+  "MARUTI": {
+   "atr": 294.42857142857144,
+   "avg_vol5": 8836.714285714286
+  },
+  "NTPC": {
+   "atr": 8.500002179827009,
+   "avg_vol5": 0.0
+  },
+  "ONGC": {
+   "atr": 4.739286150251116,
+   "avg_vol5": 0.0
+  },
+  "POWERGRID": {
+   "atr": 6.839285714285714,
+   "avg_vol5": 0.0
+  },
+  "RELIANCE": {
+   "atr": 35.200003487723215,
+   "avg_vol5": 818827.5714285715
+  },
+  "SBIN": {
+   "atr": 22.571437290736608,
+   "avg_vol5": 0.0
+  },
+  "SUNPHARMA": {
+   "atr": 41.978567940848215,
+   "avg_vol5": 18677.5
+  },
+  "TATASTEEL": {
+   "atr": 4.868567330496652,
+   "avg_vol5": 0.0
+  },
+  "TCS": {
+   "atr": 67.69287109375,
+   "avg_vol5": 16738.14285714286
+  },
+  "TITAN": {
+   "atr": 121.95002092633929,
+   "avg_vol5": 5373.571428571428
+  },
+  "ULTRACEMCO": {
+   "atr": 296.2142857142857,
+   "avg_vol5": 3428.0
+  }
+ },
+ "legs": {
+  "HINDALCO": {
+   "symbol": "HINDALCO",
+   "side": "SELL",
+   "qty": 85,
+   "trigger": 919.4,
+   "atr": 24.249995640345983,
+   "rv": 31.0,
+   "status": "CANCELLED",
+   "entry_id": "SIM1",
+   "entry_price": null,
+   "entry_time": null,
+   "stop_id": null,
+   "stop_price": null,
+   "exit_id": null,
+   "exit_price": null,
+   "exit_time": null,
+   "exit_reason": null
+  },
+  "KOTAKBANK": {
+   "symbol": "KOTAKBANK",
+   "side": "SELL",
+   "qty": 193,
+   "trigger": 479.55,
+   "atr": 10.707144601004464,
+   "rv": 11.06,
+   "status": "DONE",
+   "entry_id": "SIM2",
+   "entry_price": 479.41,
+   "entry_time": "09:21",
+   "stop_id": "SIM4",
+   "stop_price": 482.1,
+   "exit_id": "SIM6",
+   "exit_price": 477.34,
+   "exit_time": "15:15",
+   "exit_reason": "square_off"
+  },
+  "ICICIBANK": {
+   "symbol": "ICICIBANK",
+   "side": "BUY",
+   "qty": 61,
+   "trigger": 1586.9,
+   "atr": 33.642857142857146,
+   "rv": 7.83,
+   "status": "DONE",
+   "entry_id": "SIM3",
+   "entry_price": 1587.38,
+   "entry_time": "11:37",
+   "stop_id": "SIM5",
+   "stop_price": 1578.95,
+   "exit_id": null,
+   "exit_price": 1578.48,
+   "exit_time": "11:51",
+   "exit_reason": "stop"
+  }
+ }
+}
