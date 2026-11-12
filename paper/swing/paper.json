@@ -3,7 +3,16 @@
   "positions": {
     "ICICIBANK": 7
   },
-  "pending": [],
+  "pending": [
+    {
+      "id": "P1794510502837BHARTIARTL",
+      "symbol": "BHARTIARTL",
+      "side": "BUY",
+      "qty": 4,
+      "limit": 2130.1,
+      "date": "2026-11-11"
+    }
+  ],
   "fills": [
     {
       "id": "P1793214044577ICICIBANK",
@@ -19,5 +28,5 @@
     }
   ],
   "peak_equity": 101450.21123123531,
-  "last_equity": 101450.21123123531
+  "last_equity": 101328.41106033688
 }
