@@ -1,18 +1,10 @@
 {
-  "cash": 90327.21123123531,
+  "cash": 81937.08243434482,
   "positions": {
-    "ICICIBANK": 7
+    "ICICIBANK": 7,
+    "BHARTIARTL": 4
   },
-  "pending": [
-    {
-      "id": "P1794510502837BHARTIARTL",
-      "symbol": "BHARTIARTL",
-      "side": "BUY",
-      "qty": 4,
-      "limit": 2130.1,
-      "date": "2026-11-11"
-    }
-  ],
+  "pending": [],
   "fills": [
     {
       "id": "P1793214044577ICICIBANK",
@@ -25,8 +17,20 @@
       "fill_price": 1380.18975,
       "charges": 11.46,
       "status": "FILLED"
+    },
+    {
+      "id": "P1794510502837BHARTIARTL",
+      "symbol": "BHARTIARTL",
+      "side": "BUY",
+      "qty": 4,
+      "limit": 2130.1,
+      "date": "2026-11-11",
+      "fill_date": "2026-11-12",
+      "fill_price": 2095.047,
+      "charges": 9.94,
+      "status": "FILLED"
     }
   ],
-  "peak_equity": 101450.21123123531,
-  "last_equity": 101328.41106033688
+  "peak_equity": 101451.08243434482,
+  "last_equity": 101451.08243434482
 }
